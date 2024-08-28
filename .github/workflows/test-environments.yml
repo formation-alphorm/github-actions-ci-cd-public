@@ -1,0 +1,38 @@
+name: Deploy to Environments
+
+on:
+  push:
+    branches:
+      - test/**/*
+      - main
+
+jobs:
+  deploy-to-staging:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Print environment variables
+        run: |
+          echo "Common ID: ${{ vars.common_id }}"
+
+      - name: Print secret
+        run: |
+          echo "Password: ${{ secrets.password }}"   
+
+  deploy-to-production:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Print environment variables
+        run: |
+          echo "Common ID: ${{ vars.common_id }}"
+
+      - name: Print secret
+        run: |
+          echo "Password: ${{ secrets.password }}"  
