@@ -34,7 +34,8 @@ jobs:
     needs: prepare
     steps:
       - name: Print Job Context
-        run: echo "Job status: ${{ job.status }}"
+        run: |
+          echo "Job status: ${{ job.status }}"
 
       - name: Install dependencies
         run: npm install
