@@ -37,12 +37,6 @@ jobs:
         run: |
           echo "Job status: ${{ job.status }}"
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build project
-        run: npm run build
-
   # Job 3: Deploy
   deploy:
     runs-on: ubuntu-latest
