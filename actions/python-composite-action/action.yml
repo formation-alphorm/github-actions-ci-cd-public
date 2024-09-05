@@ -17,6 +17,9 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Checkout action repository
+      uses: actions/checkout@v2
+      
     - name: Setup Python
       uses: actions/setup-python@v2
       with:
