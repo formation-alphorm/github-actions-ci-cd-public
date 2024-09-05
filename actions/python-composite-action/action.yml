@@ -1,0 +1,35 @@
+name: "Install Python Dependencies and Run Tests"
+description: "Installe les dépendances Python et exécute des tests"
+author: "Anass IDI"
+inputs:
+  python-version:
+    description: "Version de Python à installer"
+    required: true
+  run-tests:
+    description: "Exécuter les tests ou non"
+    required: false
+    default: "true"
+
+outputs:
+  test-status:
+    description: "Statut de l'exécution des tests"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run tests
+      if: ${{ inputs.run-tests == 'true' }}
+      run: python test_script.py
+
+    - name: Set output for test status
+      if: ${{ inputs.run-tests == 'true' }}
+      run: echo "::set-output name=test-status::success"
+      shell: bash
