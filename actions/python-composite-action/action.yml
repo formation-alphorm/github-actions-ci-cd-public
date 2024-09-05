@@ -24,10 +24,12 @@ runs:
 
     - name: Install dependencies
       run: pip install -r requirements.txt
+      shell: bash
 
     - name: Run tests
       if: ${{ inputs.run-tests == 'true' }}
       run: python test_script.py
+      shell: bash
 
     - name: Set output for test status
       if: ${{ inputs.run-tests == 'true' }}
