@@ -9,12 +9,13 @@ jobs:
       matrix:
 #        environment: [staging, preproduction, production] 
 #        python-version: [3.6, 3.7, 3.8]   
-        - environment: staging
-          python-version: 3.6
-        - environment: preproduction
-          python-version: 3.7
-        - environment: production
-          python-version: 3.8                
+        include:
+          - environment: staging
+            python-version: 3.6
+          - environment: preproduction
+            python-version: 3.7
+          - environment: production
+            python-version: 3.8                
       fail-fast: false  
 
     environment: ${{ matrix.environment }}
