@@ -1,0 +1,28 @@
+name: Parallel Jobs with Matrix and Environments
+
+on: [push]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [staging, preproduction, production] 
+        python-version: [3.6, 3.7, 3.8]                   
+      fail-fast: false  
+
+    environment: ${{ matrix.environment }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Deploy to ${{ matrix.environment }} environment
+        run: |
+          echo "Deploying to the ${{ matrix.environment }} environment with Python ${{ matrix.python-version }}..."
+          # Ajoutez ici les étapes spécifiques à chaque environnement pour le déploiement
