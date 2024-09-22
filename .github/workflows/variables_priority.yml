@@ -19,14 +19,14 @@ jobs:
         run: |
           echo "Valeur locale de MY_VAR : $LOCAL_VAR"
 
-      - name: Afficher la variable VAR_1 (définie à la fois dans environment, repo et organisation)
+      - name: Afficher la variable VAR_1 définie à la fois dans environment, repo et organisation
         run: |
           echo "Valeur de VAR_1 est : ${{ vars.VAR_1 }}"
 		
-      - name: Afficher la variable VAR_2 (définie à la fois dans repo et organisation)
+      - name: Afficher la variable VAR_2 définie à la fois dans repo et organisation
         run: |
           echo "Valeur de VAR_2 est : ${{ vars.VAR_2 }}"
 		
-      - name: Afficher la variable VAR_3 (définie juste dans organisation)
+      - name: Afficher la variable VAR_3 définie juste dans organisation
         run: |
           echo "Valeur de VAR_3 est : ${{ vars.VAR_3 }}"
