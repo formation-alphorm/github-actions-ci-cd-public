@@ -1,0 +1,21 @@
+name: "Audit Logs GitHub Actions"
+
+on: [push]
+
+jobs:
+  audit-logs:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Récupérer les logs d'audit GitHub
+      - name: Récupérer les Logs d'Audit GitHub
+        run: |
+          curl -H "Authorization: token ${{ secrets.ACCESS_TOKEN_GITHUB }}" \
+          https://api.github.com/orgs/${{ github.repository_owner }}/audit-log
+
+      # Filtrer les événements liés aux Workflows GitHub Actions
+      - name: Filtrer les événements liés aux Workflows GitHub Actions
+        run: |
+          curl -H "Authorization: token ${{ secrets.ACCESS_TOKEN_GITHUB }}" \
+          https://api.github.com/orgs/${{ github.repository_owner }}/audit-log \
+          | jq '.[] | select(.action | contains("workflow"))'
