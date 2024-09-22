@@ -1,6 +1,7 @@
 name: Parallel Jobs with Matrix and Environments
 
-on: [push]
+#on: [push]
+on: [workflow_dispatch]
 
 jobs:
   build-and-deploy:
