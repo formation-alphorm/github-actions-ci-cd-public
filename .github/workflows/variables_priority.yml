@@ -13,20 +13,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Afficher la priorité des variables
+      - name: Afficher la variable locale
         env:
           LOCAL_VAR: "Valeur locale dans le workflow"
         run: |
-          echo "Valeur locale de MY_VAR : $LOCAL_VAR"
+          echo "Valeur locale de LOCAL_VAR : $LOCAL_VAR"
 
-      - name: Afficher la variable VAR_1 définie à la fois dans environment, repo et organisation
+      - name: Afficher la variable VAR_1 (environment, dépôt, organisation)
         run: |
-          echo "Valeur de VAR_1 est : ${{ env.VAR_1 }}"
-		
-      - name: Afficher la variable VAR_2 définie à la fois dans repo et organisation
+          echo "Valeur de VAR_1 : ${{ vars.VAR_1 }}"  # Priorité à l'environnement
+
+      - name: Afficher la variable VAR_2 (dépôt, organisation)
         run: |
-          echo "Valeur de VAR_2 est : ${{ env.VAR_2 }}"
-		
-      - name: Afficher la variable VAR_3 définie juste dans organisation
+          echo "Valeur de VAR_2 : ${{ vars.VAR_2 }}"  # Priorité au dépôt
+
+      - name: Afficher la variable VAR_3 (organisation uniquement)
         run: |
-          echo "Valeur de VAR_3 est : ${{ env.VAR_3 }}"
+          echo "Valeur de VAR_3 : ${{ vars.VAR_3 }}"  # Valeur de l'organisation
