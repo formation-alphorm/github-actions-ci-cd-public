@@ -1,0 +1,29 @@
+name: Sécuriser et Superviser un Runner Self-Hosted sur Windows
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  securite-demo:
+    runs-on: self-hosted
+    environment: production
+    permissions:
+      actions: read
+      contents: read
+      id-token: none
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Vérifier les accès réseau (Bloquer Google)
+        run: |
+          ping google.com || echo "Google est bloqué"
+
+      - name: Utiliser un secret de manière sécurisée
+        env:
+          API_KEY: ${{ secrets.PASSWORD }}
+        run: |
+          echo "Exécution d'une commande avec le secret sécurisé."
+          curl -H "Authorization: Bearer $API_KEY" https://api.example.com/deploy
