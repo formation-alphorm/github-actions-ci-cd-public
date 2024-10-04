@@ -19,3 +19,4 @@ jobs:
           curl -H "Authorization: token ${{ secrets.ACCESS_TOKEN_GITHUB }}" \
           https://api.github.com/orgs/${{ github.repository_owner }}/audit-log \
           | jq '.[] | select(.action | contains("workflow"))'
+
